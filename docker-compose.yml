@@ -9,7 +9,7 @@ services:
       DB_HOST: "database-1.chgcawess2vp.us-west-2.rds.amazonaws.com"
       DB_DATABASE: "mydb"
       DB_USER: "admin"
-      DB_PASSWORD: "passwd"
+      DB_PASSWORD: "mypassword"
 
   apache:
     build: './apache/'
