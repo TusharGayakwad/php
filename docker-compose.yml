@@ -1,41 +1,30 @@
-version: "3.8"
-
+version: "3"
 services:
-  php-backend:
+  php:
     build: './php/'
-    container_name: php-backend
     volumes:
       - ./public:/var/www/html/
-      # - ./public/dump:/docker-entrypoint-initdb.d/  # Directory for initial SQL scripts
     environment:
-      # Update MySQL connection details for RDS
-      environment:
-        MYSQL_HOST: "database-1-instance-1.c3qw4u6g6zrr.ap-northeast-1.rds.amazonaws.com"
-        MYSQL_PORT: "3306"
-        MYSQL_DATABASE: "mydb"
-        MYSQL_USER: "user1"
-        MYSQL_PASSWORD: "mypassword"
-    ports:
-      - "9000:9000"
+      # Update environment variables for database connection
+      DB_HOST: "database-1.chgcawess2vp.us-west-2.rds.amazonaws.com"
+      DB_DATABASE: "mydb"
+      DB_USER: "admin"
+      DB_PASSWORD: "passwd"
 
   apache:
     build: './apache/'
     depends_on:
-      - php-backend
+      - php
     ports:
       - "8080:80"
     volumes:
       - ./public:/var/www/html/
     environment:
-      MYSQL_HOST: "database-1-instance-1.c3qw4u6g6zrr.ap-northeast-1.rds.amazonaws.com"
-      MYSQL_PORT: "3306"
-      MYSQL_DATABASE: "mydb"
-      MYSQL_USER: "user1"
-      MYSQL_PASSWORD: "mypassword"
-
-
-
-# No MySQL service since you're using RDS
+      # Update environment variables for database connection
+      DB_HOST: "database-1.chgcawess2vp.us-west-2.rds.amazonaws.com"
+      DB_DATABASE: "mydb"
+      DB_USER: "admin"
+      DB_PASSWORD: "mypassword"
 
 volumes:
-  db_data: {}  # Defined, but not used since we're not running a MySQL container
+  db_data: {}  # This volume is no longer needed if you're not using the local MySQL container
