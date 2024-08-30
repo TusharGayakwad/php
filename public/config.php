@@ -1,7 +1,7 @@
 <?php
 define('DB_SERVER', 'database-1.chgcawess2vp.us-west-2.rds.amazonaws.com');
 define('DB_USERNAME', 'admin');
-define('DB_PASSWORD', 'passwd');
+define('DB_PASSWORD', 'mypassword');
 define('DB_NAME', 'mydb');
 
 // Attempt to connect to MySQL database 
